@@ -11,15 +11,16 @@
 using namespace std;
 
 class Problem {
-    public:
+    private : 
         vector <vector <int> > intialState;
         vector <vector<int> > goalState;
 
-        Problem (vector <vector <int> > &intialState, vector <vector<int> > &goalState);
+    public : 
+        Problem (vector <vector <int> > &intialState);
 
+        void setDefaultState (); 
+    
 
-
-    private:
 
 
 
