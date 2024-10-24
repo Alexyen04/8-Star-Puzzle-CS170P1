@@ -27,10 +27,22 @@ int main () {
         << "Uniform Cost Search (1)" << endl
         << "A* with the Misplaced Tile heuristic (2)" << endl
         << "A* with the Euclidean distance heuristic (3)" << endl;
-
+    
     cin >> algo;
 
-    
+    switch (algo) {
+        case 1:     
+            //function 1
+            break;
+        case 2:
+            //function 2
+            break;
+        case 3:
+            //function 3
+            break;
+        default: 
+            cout << "Enter valid number for corresponding algorithm: 1 or 2 or 3" << endl;
+    }
 
 
     

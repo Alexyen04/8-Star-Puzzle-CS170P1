@@ -14,9 +14,6 @@ using namespace std;
 class Search {
     private :
         Problem problem;
-        
-    
-
 
     public :
 

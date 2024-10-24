@@ -19,9 +19,6 @@ class Problem {
         Problem (vector <vector <int> > &intialState);
 
         void setDefaultState (); 
-    
-
-
 
 
 };
