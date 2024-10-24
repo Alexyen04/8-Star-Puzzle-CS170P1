@@ -3,7 +3,6 @@
 
 #include "problem.h"
 #include "node.h"
-
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -19,17 +18,16 @@ class Search {
 
         Search (const Problem &problem);
 
+        void generalSearch(Problem, queue<Node>);
+
         // Function to perform Uniform Cost Search
-        void uniformCostSearch (Problem);
+        queue<Node> uniformCost (Problem);
 
         // Function to perform A* Search with Misplaced Tiles heuristic
-        void aStarSearchMisplacedTiles (Problem);
+        queue<Node> aStarSearchMisplacedTiles (Problem);
 
         // Function to perform A* Search with Euclidean Distance heuristic
-        void aStarSearchEuclidean (Problem);
-
-    
-    
+        queue<Node> aStarSearchEuclidean (Problem); 
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "../include/problem.h"
 
+
 using namespace std;
 
 Problem::Problem(const vector <vector <int> > &intial) {
@@ -21,7 +22,7 @@ void Problem::setDefaultState () {
                         {7, 5, 8}     };
 }
 
-vector <vector <int> > Problem::getIntialState() const{
+vector <vector <int> > Problem::getInitialState() const{
     return initialState;
 }
 
