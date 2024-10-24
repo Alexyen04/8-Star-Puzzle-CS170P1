@@ -14,7 +14,7 @@ int main () {
     int algo = 0;
     Problem eightPuzzle; //default
 
-    vector <vector <int> > inputState;
+    vector <vector <int> > inputState(3, vector<int>(3, 0));
 
     cout << "Welcome to XXX 8 puzzle solver." << endl;
 
@@ -24,8 +24,10 @@ int main () {
     }
 
     if (input == 2) {
-        cout << "Enter your puzzle." << endl << "Format for each row should be 'x y z', space inbetween each number."
+        cout << "Enter your puzzle." << endl << "Format for each row should be 'x y z', space inbetween each number. "
             << "Use '0' to represent a blank." << endl;
+
+        cin.ignore();
 
         //input here NEEDED
         string line;
@@ -64,6 +66,13 @@ int main () {
             break;
         default: 
             cout << "Enter valid number for corresponding algorithm: 1 or 2 or 3" << endl;
+    }
+
+    for (auto &x: inputState) {
+        for (auto &y : x) {
+            cout << y << " ";
+        }
+        cout << endl;
     }
 
     return 0;
