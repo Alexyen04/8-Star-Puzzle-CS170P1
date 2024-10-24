@@ -1,8 +1,8 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
-#include "Problem.h"
-#include "Node.h"
+#include "problem.h"
+#include "node.h"
 
 #include <vector>
 #include <queue>
@@ -20,13 +20,13 @@ class Search {
         Search (const Problem &problem);
 
         // Function to perform Uniform Cost Search
-        void uniformCostSearch ();
+        void uniformCostSearch (Problem);
 
         // Function to perform A* Search with Misplaced Tiles heuristic
-        void aStarSearchMisplacedTiles ();
+        void aStarSearchMisplacedTiles (Problem);
 
         // Function to perform A* Search with Euclidean Distance heuristic
-        void aStarSearchEuclidean ();
+        void aStarSearchEuclidean (Problem);
 
     
     

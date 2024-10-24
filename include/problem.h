@@ -12,13 +12,23 @@ using namespace std;
 
 class Problem {
     private : 
-        vector <vector <int> > intialState;
+        vector <vector <int> > initialState;
         vector <vector<int> > goalState;
 
     public : 
-        Problem (vector <vector <int> > &intialState);
+
+        Problem() : 
+            initialState({{1, 2, 3}, {4, 8, 0}, {7, 6, 5}}), 
+            goalState({{1, 2, 3}, {4, 5, 6}, {7, 8, 0}})
+        {}
+        
+        Problem (const vector <vector <int> > &intialState);
+
+        void setUserState (const vector <vector <int> > &);
 
         void setDefaultState (); 
+
+        vector <vector <int> > getIntialState() const;
 
 
 };

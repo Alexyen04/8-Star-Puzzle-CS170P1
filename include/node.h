@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <utility>
+#include <algorithm>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ class Node {
         int h;  //heuristic or h(n)
         int totalCost; //f(n)
 
-        pair <int, int> blankCoord; //coords of the BLANK or 0
+        pair <int, int> blankCoord; //coords of the BLANK or 0  
 
         const vector <pair <int, int> > moves = {
             {-1,0}, //UP
@@ -29,9 +30,15 @@ class Node {
         };
 
     public :
-        Node() : state(3, vector<int>(3, 0)), parent(nullptr), manhattanD(0), g(0), h(0), totalCost(0), blankCoord({0, 0}) {}
-        Node (vector<vector <int> >& state, Node* parent = nullptr, int totalCost = 0, pair<int, int> coords = {});
+        Node () : state(3, vector<int>(3, 0)), parent(nullptr), manhattanD(0), g(0), h(0), totalCost(0), blankCoord({0, 0}) {}
+
+        Node (const vector<vector<int>>& state, Node* parent); 
+
+        Node (const vector<vector<int>>& state, Node* parent, int totalCost, pair<int, int> coords);
+        
         Node* getParent() const; 
+
+        void setState(vector <vector<int> >);
         void setParent(Node *);
 
         int getG() const;

@@ -9,16 +9,24 @@
 
 using namespace std;
 
+//constructors
 
-Node::Node(vector<vector<int>>& state, Node* parent, int totalCost, pair<int, int> coords)
-    : state(state), parent(parent), totalCost(totalCost), blankCoord(coords) {
+Node::Node(const vector<vector<int>>& state, Node* parent) 
+    : state(state), parent(parent), manhattanD(0), g(0), h(0), totalCost(g + h), blankCoord({0, 0}) {}
 
-}
+Node::Node(const vector<vector<int>>& state, Node* parent, int totalCost, pair<int, int> coords) 
+    : state(state), parent(parent), manhattanD(0), g(0), h(0), totalCost(totalCost), blankCoord(coords) {}
+
+
 
 //setters and getters
 
 Node* Node::getParent() const {
     return parent;
+}
+
+void Node::setState(vector <vector<int> > s) {
+    state = s;
 }
 
 void Node::setParent(Node* p) {
@@ -75,14 +83,51 @@ void Node::findBlank() {
 }
 
 vector <Node*> Node::generateChildren() {
+    findBlank();
     vector <Node*> listOfChildren; 
     Node child;
-    
-    for (auto &x : moves ) {
-        
+
+    //UP
+    if (blankCoord.first - 1 >= 0) {
+        vector <vector <int> > newState = cloneState();
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first - 1][blankCoord.second]); //swaps blank UP 1
+        Node* child = new Node(newState, this); //creates a child node
+        child->setG(this->getG() + 1); //increases depth by 1
+        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        listOfChildren.push_back(child); 
     }
 
+    //DOWN
+    if (blankCoord.first + 1 <= 2) {
+        vector <vector <int> > newState = cloneState();
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first + 1][blankCoord.second]); //swaps blank UP 1
+        Node* child = new Node(newState, this); //creates a child node
+        child->setG(this->getG() + 1); //increases depth by 1
+        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        listOfChildren.push_back(child); 
+    }
 
+    //LEFT
+    if (blankCoord.second - 1 >= 0) {
+        vector <vector <int> > newState = cloneState();
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second - 1]); //swaps blank UP 1
+        Node* child = new Node(newState, this); //creates a child node
+        child->setG(this->getG() + 1); //increases depth by 1
+        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        listOfChildren.push_back(child); 
+    }
+
+    //RIGHT
+    if (blankCoord.second + 1 <= 2) {
+        vector <vector <int> > newState = cloneState();
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second + 1]); //swaps blank UP 1
+        Node* child = new Node(newState, this); //creates a child node
+        child->setG(this->getG() + 1); //increases depth by 1
+        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        listOfChildren.push_back(child); 
+    }
+
+    return listOfChildren;
 }  
 
 bool Node::isGoal(const vector<vector<int>>& goalState) const {
@@ -97,7 +142,7 @@ int Node::calculateManhattanDistance() {
         for (int j = 0; j < 3; ++j) {
             currentNum = this->state[i][j];
             if (currentNum != 0) {
-                distance += abs(i - goalState.at(currentNum).first) + abs(j - goalState.at(currentNum).second);
+                distance += abs(i - GOALMAP.at(currentNum).first) + abs(j - GOALMAP.at(currentNum).second);
             }
         }
     }
