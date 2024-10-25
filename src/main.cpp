@@ -50,14 +50,18 @@ int main () {
         << "A* with the Euclidean distance heuristic (3)" << endl;
 
     cin >> algo;
+    Search search(eightPuzzle, algo);
+    search.generalSearch(eightPuzzle, algo);
 
-    switch (algo) {
+    /*switch (algo) {
         case 1:     
             //call function 1 here
+            search.generalSearch(eightPuzzle, algo);
             cout << "func 1";
             break;
         case 2:
             //call function 1 here
+            search.generalSearch(eightPuzzle, algo);
             cout << "func2";
             break;
         case 3:
@@ -73,7 +77,7 @@ int main () {
             cout << y << " ";
         }
         cout << endl;
-    }
+    } */
 
     return 0;
 }

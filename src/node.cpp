@@ -12,10 +12,10 @@ using namespace std;
 //constructors
 
 Node::Node(const vector<vector<int>>& state, Node* parent) 
-    : state(state), parent(parent), manhattanD(0), g(0), h(0), totalCost(g + h), blankCoord({0, 0}) {}
+    : state(state), parent(parent), g(0), h(0), totalCost(g + h), blankCoord({0, 0}) {}
 
 Node::Node(const vector<vector<int>>& state, Node* parent, int totalCost, pair<int, int> coords) 
-    : state(state), parent(parent), manhattanD(0), g(0), h(0), totalCost(totalCost), blankCoord(coords) {}
+    : state(state), parent(parent), g(0), h(0), totalCost(totalCost), blankCoord(coords) {}
 
 
 
@@ -67,7 +67,6 @@ void Node::printState() const{
         }
         cout << endl;
     }
-
     cout << "Depth : " << g << endl
         << "Cost : " << totalCost << endl;
 }
@@ -93,7 +92,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first - 1][blankCoord.second]); //swaps blank UP 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
-        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
 
@@ -103,7 +102,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first + 1][blankCoord.second]); //swaps blank UP 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
-        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
 
@@ -113,7 +112,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second - 1]); //swaps blank UP 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
-        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
 
@@ -123,7 +122,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second + 1]); //swaps blank UP 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
-        child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
+        //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
 
@@ -134,6 +133,7 @@ bool Node::isGoal(const vector<vector<int>>& goalState) const {
     return (this->state == goalState);
 }
 
+/*
 int Node::calculateManhattanDistance() {
     int distance = 0;
     int currentNum;
@@ -147,6 +147,41 @@ int Node::calculateManhattanDistance() {
         }
     }
 
+    return distance;
+}
+*/
+
+int Node::calculateMisplacedTiles() {
+    int count = 0;
+    for (int i = 0; i < state.size(); ++i) {
+        for (int j = 0; j < state[i].size(); ++j) {
+            // Check that tile is not the blank tile (0)
+            if (state[i][j] != 0) {
+                auto tilePosition = GOALMAP.at(state[i][j]); // Get goal position as a pair
+                //if the tile is not in its goal position, add one to misplace tiles count 
+                if (tilePosition.first != i || tilePosition.second != j) {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+} 
+
+int Node::calculateEuclideanDistance() {
+    double distance = 0.0;
+    for (int i = 0; i < state.size(); ++i) {
+        for (int j = 0; j < state[i].size(); ++j) {
+            int currNum = state[i][j];
+            if (currNum != 0) { // Ignore the blank tile
+                //gets positions of the goal tile location
+                int goalI = GOALMAP.at(currNum).first;
+                int goalJ = GOALMAP.at(currNum).second; 
+                // Calculate Euclidean distance
+                distance += sqrt(pow(i - goalI, 2) + pow(j - goalJ, 2));
+            }
+        }
+    }
     return distance;
 }
 
