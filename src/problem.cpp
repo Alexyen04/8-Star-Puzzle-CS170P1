@@ -26,4 +26,8 @@ vector <vector <int> > Problem::getInitialState() const{
     return initialState;
 }
 
+vector <vector <int> > Problem::getGoalState() const {
+    return goalState;
+}
+
 
