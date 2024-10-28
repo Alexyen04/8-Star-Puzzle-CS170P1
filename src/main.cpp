@@ -68,6 +68,7 @@ int main () {
             cout << "Enter valid number for corresponding algorithm: 1 or 2 or 3" << endl;
     }
 
+    //Print input for test
     for (auto &x: inputState) {
         for (auto &y : x) {
             cout << y << " ";
