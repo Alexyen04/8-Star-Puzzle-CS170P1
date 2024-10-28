@@ -1,6 +1,5 @@
 #include "../include/problem.h"
 
-
 using namespace std;
 
 Problem::Problem(const vector <vector <int> > &intial) {

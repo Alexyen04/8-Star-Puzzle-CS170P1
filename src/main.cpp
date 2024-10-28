@@ -50,7 +50,7 @@ int main () {
         << "A* with the Euclidean distance heuristic (3)" << endl;
 
     cin >> algo;
-    Search search(eightPuzzle, algo);
+    Search search(eightPuzzle);
     search.generalSearch(eightPuzzle, algo);
 
     /*switch (algo) {
@@ -70,15 +70,17 @@ int main () {
             break;
         default: 
             cout << "Enter valid number for corresponding algorithm: 1 or 2 or 3" << endl;
-    }
+    }*/
 
+   /*
     //Print input for test
-    for (auto &x: inputState) {
+    for (auto &x: eightPuzzle.getInitialState()) {
         for (auto &y : x) {
             cout << y << " ";
         }
         cout << endl;
-    } */
+    } 
+    */
 
     return 0;
 }

@@ -68,7 +68,7 @@ void Node::printState() const{
         cout << endl;
     }
     cout << "Depth : " << g << endl
-        << "Cost : " << totalCost << endl;
+        << "Cost : " << g + h << endl;
 }
 
 void Node::findBlank() {
@@ -84,7 +84,6 @@ void Node::findBlank() {
 vector <Node*> Node::generateChildren() {
     findBlank();
     vector <Node*> listOfChildren; 
-    Node child;
 
     //UP
     if (blankCoord.first - 1 >= 0) {
@@ -99,7 +98,7 @@ vector <Node*> Node::generateChildren() {
     //DOWN
     if (blankCoord.first + 1 <= 2) {
         vector <vector <int> > newState = cloneState();
-        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first + 1][blankCoord.second]); //swaps blank UP 1
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first + 1][blankCoord.second]); //swaps blank DOWN 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
@@ -109,7 +108,7 @@ vector <Node*> Node::generateChildren() {
     //LEFT
     if (blankCoord.second - 1 >= 0) {
         vector <vector <int> > newState = cloneState();
-        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second - 1]); //swaps blank UP 1
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second - 1]); //swaps blank LEFT 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
@@ -119,7 +118,7 @@ vector <Node*> Node::generateChildren() {
     //RIGHT
     if (blankCoord.second + 1 <= 2) {
         vector <vector <int> > newState = cloneState();
-        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second + 1]); //swaps blank UP 1
+        swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second + 1]); //swaps blank RIGHT 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
