@@ -60,7 +60,11 @@ class Node {
 
         bool isGoal(const vector<vector<int>>& goalState) const; //compares if state is the same as the GOAL
 
-        int calculateManhattanDistance(); //calculates manhattan distance for the grid
+        //int calculateManhattanDistance(); //calculates manhattan distance for the grid
+
+        int calculateMisplacedTiles(); // calculates # of misplaced tiles
+
+        int calculateEuclideanDistance(); // calculates total eucliedean distance
 
         vector<vector<int>> cloneState() const; //creates a new state
 

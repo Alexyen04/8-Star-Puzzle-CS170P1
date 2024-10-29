@@ -7,18 +7,25 @@
 #include <queue>
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <set>
 
 using namespace std;
 
 class Search {
     private :
         Problem problem;
+        int searchType;
 
     public :
 
         Search (const Problem &problem);
 
-        void generalSearch(Problem, queue<Node>);
+        Search(const Problem &problem, int searchType);
+
+        void generalSearch(Problem, int);
+
+        /*
 
         // Function to perform Uniform Cost Search
         queue<Node> uniformCost (Problem);
@@ -28,6 +35,9 @@ class Search {
 
         // Function to perform A* Search with Euclidean Distance heuristic
         queue<Node> aStarSearchEuclidean (Problem); 
+        
+        */
+        
 };
 
 #endif

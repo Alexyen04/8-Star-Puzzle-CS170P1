@@ -28,9 +28,9 @@ class Problem {
 
         void setDefaultState (); 
 
-        vector <vector <int> > getIntialState() const;
+        vector <vector <int> > getInitialState() const;
 
+        vector <vector <int> > getGoalState() const;
 
 };
-
 #endif
