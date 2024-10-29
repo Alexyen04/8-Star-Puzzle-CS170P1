@@ -17,9 +17,6 @@ struct compare {
 void Search::generalSearch(Problem puzzle, int searchType) {
     //initialize frontier using initial state of problem
     Node* initialNode = new Node(puzzle.getInitialState(), nullptr); 
-
-    cout << "Initial Node State:" << endl;
-    initialNode->printState(); // Print the initial state
     
     //create queue of Node pointers for the frontier
     //elements are node objects, vector is used to store the node objects
@@ -79,6 +76,9 @@ void Search::generalSearch(Problem puzzle, int searchType) {
                 } else if (searchType == 3) {
                     curr->setH(static_cast<int>(curr->calculateEuclideanDistance()));
                 }
+
+                curr->setTotalCost(curr->getG() + curr->getH());
+
                 frontier.push(curr);
                 frontierSet.insert(curr->cloneState());
             }
