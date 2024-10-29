@@ -1,5 +1,4 @@
 #include "../include/search.h"
-#include <set>
 
 using namespace std;
 
@@ -17,6 +16,9 @@ struct compare {
 void Search::generalSearch(Problem puzzle, int searchType) {
     //initialize frontier using initial state of problem
     Node* initialNode = new Node(puzzle.getInitialState(), nullptr); 
+    int numNodesExpanded = 1;
+    int maxNodesQueue = 1;
+    int goalDepth = 0;
     
     //create queue of Node pointers for the frontier
     //elements are node objects, vector is used to store the node objects
@@ -38,6 +40,8 @@ void Search::generalSearch(Problem puzzle, int searchType) {
             cout << "Failure" << endl;
             return;
         }
+
+        maxNodesQueue = max(maxNodesQueue, static_cast<int>(frontier.size()));
         
         //choose a leaf node and remove it from the frontier
         Node* currentNode = frontier.top();
@@ -46,6 +50,7 @@ void Search::generalSearch(Problem puzzle, int searchType) {
 
         //if the node contains a goal state then return thhe corresponding solution
         if (currentNode->isGoal(puzzle.getGoalState())) {
+            goalDepth = currentNode->getG();
             vector<Node*> solutionPath;
             while (currentNode != nullptr) {
                 solutionPath.push_back(currentNode);
@@ -54,6 +59,11 @@ void Search::generalSearch(Problem puzzle, int searchType) {
             for (auto it = solutionPath.rbegin(); it != solutionPath.rend(); ++it) {
                 (*it)->printState();
             }
+
+            cout << "Search algorithm expanded a total of " << numNodesExpanded << " nodes." << endl;
+            cout << "Maximum number of nodes in the queue at anytime: " << maxNodesQueue << endl; //not sure what this is
+            cout << "The depth of goal node is: " << goalDepth << endl;
+
             return;
             // currentNode->printState();
             // return;
@@ -64,6 +74,7 @@ void Search::generalSearch(Problem puzzle, int searchType) {
 
         //expand the chosen node, 
         vector<Node*> children = currentNode->generateChildren();
+        numNodesExpanded += children.size();
 
         //add the resulting nodes to the frontier only if not in the frontier or explored set
         for (Node* curr : children) {

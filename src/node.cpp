@@ -69,7 +69,7 @@ void Node::printState() const{
     }
     cout << "Depth : " << g << endl
         << "Heuristic : " << h << endl
-        << "Total Cost : " << g + h << endl;
+        << "Total Cost : " << g + h << endl << endl;
 }
 
 void Node::findBlank() {
