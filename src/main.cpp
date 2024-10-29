@@ -24,14 +24,14 @@ int main () {
     }
 
     if (input == 2) {
-        cout << "Enter your puzzle." << endl << "Format for each row should be 'x y z', space inbetween each number. "
-            << "Use '0' to represent a blank." << endl;
+        cout << "Enter your puzzle, use a zero to represent the blank\n"; 
 
         cin.ignore();
 
         //input here NEEDED
         string line;
         for (int i = 0; i < 3; ++i) {
+            cout << "Enter the " << i + 1 << "st row, use space or tabs between numbers\n";
             getline(cin, line); // Read a line of input
             stringstream ss(line); // Create a string stream from the line
 

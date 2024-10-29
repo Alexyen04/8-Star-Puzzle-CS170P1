@@ -60,9 +60,10 @@ void Search::generalSearch(Problem puzzle, int searchType) {
                 (*it)->printState();
             }
 
-            cout << "Search algorithm expanded a total of " << numNodesExpanded << " nodes." << endl;
-            cout << "Maximum number of nodes in the queue at anytime: " << maxNodesQueue << endl; //not sure what this is
-            cout << "The depth of goal node is: " << goalDepth << endl;
+            cout << "Goal!!!" << endl << endl;
+            cout << "To solve this problem the search algorithm expanded a total of " << numNodesExpanded << " nodes." << endl;
+            cout << "The maximum number of nodes in the queue at any one time: " << maxNodesQueue << endl; //not sure what this is
+            cout << "The depth of goal node was " << goalDepth << endl;
 
             return;
             // currentNode->printState();
