@@ -16,7 +16,7 @@ int main () {
 
     vector <vector <int> > inputState(3, vector<int>(3, 0));
 
-    cout << "Welcome to XXX 8 puzzle solver." << endl;
+    cout << "Welcome to 862455615, 862284759, and 862360359 8 puzzle solver." << endl;
 
     while (input != 1 && input != 2) {
         cout << "Type '1' to use default puzzle or '2' to enter your own puzzle." << endl;
@@ -31,7 +31,15 @@ int main () {
         //input here NEEDED
         string line;
         for (int i = 0; i < 3; ++i) {
-            cout << "Enter the " << i + 1 << "st row, use space or tabs between numbers\n";
+            if (i == 0) {
+                cout << "Enter the first row, use space or tabs between numbers\n";
+            }
+            else if (i == 1) {
+                cout << "Enter the second row, use space or tabs between numbers\n";
+            }
+            else {
+                cout << "Enter the third row, use space or tabs between numbers\n";
+            }
             getline(cin, line); // Read a line of input
             stringstream ss(line); // Create a string stream from the line
 
