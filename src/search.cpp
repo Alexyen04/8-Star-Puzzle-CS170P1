@@ -16,7 +16,7 @@ struct compare {
 void Search::generalSearch(Problem puzzle, int searchType) {
     //initialize frontier using initial state of problem
     Node* initialNode = new Node(puzzle.getInitialState(), nullptr); 
-    int numNodesExpanded = 1;
+    int numNodesExpanded = 0;
     int maxNodesQueue = 1;
     int goalDepth = 0;
     
@@ -75,7 +75,7 @@ void Search::generalSearch(Problem puzzle, int searchType) {
 
         //expand the chosen node, 
         vector<Node*> children = currentNode->generateChildren();
-        numNodesExpanded += children.size();
+        numNodesExpanded++;
 
         //add the resulting nodes to the frontier only if not in the frontier or explored set
         for (Node* curr : children) {
