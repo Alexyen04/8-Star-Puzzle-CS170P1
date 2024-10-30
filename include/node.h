@@ -19,6 +19,7 @@ class Node {
         int g; //depth or g(n)
         int h;  //heuristic or h(n)
         int totalCost; //f(n)
+        string directionToState; 
 
         pair <int, int> blankCoord; //coords of the BLANK or 0  
 
@@ -30,7 +31,7 @@ class Node {
         };
 
     public :
-        Node () : state(3, vector<int>(3, 0)), parent(nullptr), manhattanD(0), g(0), h(0), totalCost(0), blankCoord({0, 0}) {}
+        Node () : state(3, vector<int>(3, 0)), parent(nullptr), manhattanD(0), g(0), h(0), totalCost(0), directionToState("NONE"), blankCoord({0, 0}) {}
 
         Node (const vector<vector<int>>& state, Node* parent); 
 
@@ -49,6 +50,8 @@ class Node {
 
         int getTotalCost() const;
         void setTotalCost(int);
+
+        void setDirection(string);
 
         void printState() const;
 

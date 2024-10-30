@@ -47,7 +47,8 @@ int main () {
     cout << "Enter choice of algorithm. (Enter in Number)" << endl 
         << "Uniform Cost Search (1)" << endl
         << "A* with the Misplaced Tile heuristic (2)" << endl
-        << "A* with the Euclidean distance heuristic (3)" << endl;
+        << "A* with the Euclidean distance heuristic (3)" << endl
+        << "-----------------------------------------------" << endl << endl;
 
     cin >> algo;
     Search search(eightPuzzle);

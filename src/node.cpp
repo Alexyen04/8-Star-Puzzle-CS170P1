@@ -12,10 +12,10 @@ using namespace std;
 //constructors
 
 Node::Node(const vector<vector<int>>& state, Node* parent) 
-    : state(state), parent(parent), g(0), h(0), totalCost(g + h), blankCoord({0, 0}) {}
+    : state(state), parent(parent), g(0), h(0), totalCost(g + h), directionToState("NONE"), blankCoord({0, 0}) {}
 
 Node::Node(const vector<vector<int>>& state, Node* parent, int totalCost, pair<int, int> coords) 
-    : state(state), parent(parent), g(0), h(0), totalCost(totalCost), blankCoord(coords) {}
+    : state(state), parent(parent), g(0), h(0), totalCost(totalCost), directionToState("NONE"), blankCoord(coords) {}
 
 
 
@@ -57,19 +57,33 @@ void Node::setTotalCost(int cost) {
     totalCost = cost;
 }
 
+void Node::setDirection(string s) {
+    directionToState = s;
+}
 
 //functions 
 
 void Node::printState() const{
+    if(directionToState == "NONE") {
+        cout << "INTIAL STATE" << endl
+        << "-------" << endl;
+    } else {
+        cout << "Blank spaces moves " << directionToState << endl
+        << "-------" << endl;
+    }
+
     for (auto &x : state) {
         for (auto &y : x) { 
             cout << y << " ";
         }
         cout << endl;
     }
+    cout << "-------" << endl;
+
     cout << "Depth : " << g << endl
         << "Heuristic : " << h << endl
-        << "Total Cost : " << g + h << endl << endl;
+        << "Total Cost : " << g + h << endl 
+        << endl;
 }
 
 void Node::findBlank() {
@@ -92,6 +106,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first - 1][blankCoord.second]); //swaps blank UP 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
+        child->setDirection("UP");
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
@@ -102,6 +117,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first + 1][blankCoord.second]); //swaps blank DOWN 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
+        child->setDirection("DOWN");
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
@@ -112,6 +128,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second - 1]); //swaps blank LEFT 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
+        child->setDirection("LEFT");
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
@@ -122,6 +139,7 @@ vector <Node*> Node::generateChildren() {
         swap(newState[blankCoord.first][blankCoord.second], newState[blankCoord.first][blankCoord.second + 1]); //swaps blank RIGHT 1
         Node* child = new Node(newState, this); //creates a child node
         child->setG(this->getG() + 1); //increases depth by 1
+        child->setDirection("RIGHT");
         //child->setH(child->calculateManhattanDistance()); //calculates the manhattan for the newly generated child
         listOfChildren.push_back(child); 
     }
