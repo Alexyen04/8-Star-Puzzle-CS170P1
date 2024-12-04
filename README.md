@@ -1,94 +1,61 @@
-# Eight Puzzle Solver
+# 8-Puzzle Solver
 
 ## Project Overview
-This project implements an Eight Puzzle solver using three different search algorithms:
-1. Uniform Cost Search
-2. A* Search with Misplaced Tile Heuristic
-3. A* Search with Euclidean Distance Heuristic
+A C++ implementation of the 8-Puzzle solver using advanced search algorithms for CS170 Project 1.
 
-## Project Requirements
-- Solve the Eight Puzzle using different search strategies
-- Implement an object-oriented design
-- Allow arbitrary initial state input
-- Generate detailed search trace
-- Compare algorithm performance
-
-## Features
-- Flexible puzzle solver supporting 8-puzzle and potentially extendable to 15-puzzle or 25-puzzle
-- Multiple search algorithm implementations
-- Interactive user interface for puzzle input
-- Detailed search trace and performance metrics
-
-## Installation
-
-### Prerequisites
-- Python 3.x or C++ compiler
-- Standard library data structures (priority queue, etc.)
-
-### Setup
-1. Clone the repository
-2. Ensure you have the required programming language environment
-3. (Optional) Install any additional dependencies
-
-## Usage
-
-### Running the Solver
-1. Choose the initial puzzle state
-   - Option 1: Use default puzzle configuration
-   - Option 2: Enter a custom puzzle configuration
-
-2. Select search algorithm:
-   - Uniform Cost Search
-   - A* with Misplaced Tile Heuristic
-   - A* with Euclidean Distance Heuristic
-
-### Example Input Format
-```
-Enter your puzzle, use a zero to represent the blank
-1 2 3
-4 8 0
-7 6 5
-```
+## Algorithms
+- Uniform Cost Search
+- A* Search with Misplaced Tile Heuristic
+- A* Search with Euclidean Distance Heuristic
 
 ## Project Structure
+### Header Files
+- `goal.h`: Defines goal state mapping
+- `node.h`: Node class for search tree implementation
+- `problem.h`: Manages initial and goal states
+- `search.h`: Implements search algorithms
 
-### Recommended Classes
-- `Problem`: Manages initial and goal states, available operators
-- `Node`: Represents search tree nodes with parent references
-- `Solver`: Implements search algorithms
+### Key Classes
+- `Node`: Represents puzzle states
+  - Tracks state, parent node
+  - Calculates heuristics
+  - Generates child states
+- `Problem`: Manages puzzle configuration
+- `Search`: Implements search algorithms
 
-### Key Methods
-- `generate_successors()`: Create possible puzzle states
-- `calculate_heuristic()`: Compute heuristic values
-- `search()`: Implement search algorithms
+## Features
+- Flexible puzzle state input
+- Multiple search algorithm options
+- Heuristic-based state exploration
+- Detailed state tracking
+
+## Prerequisites
+- C++ Compiler (C++11 or later)
+- Standard Template Library (STL)
+
+## Compilation
+```bash
+# Example compilation command (adjust as needed)
+g++ -std=c++11 main.cpp node.cpp problem.cpp search.cpp -o puzzle_solver
+```
+
+## Usage
+```bash
+# Run the executable
+./puzzle_solver
+```
+
+### Input Options
+1. Use default puzzle configuration
+2. Enter custom puzzle state
+3. Choose search algorithm
+
+## Heuristic Methods
+- Misplaced Tiles
+- Euclidean Distance
+- Uniform Cost Search
 
 ## Performance Metrics
-The solver tracks:
-- Total nodes expanded
+- Nodes expanded
+- Solution depth
 - Maximum queue size
-- Goal node depth
-
-## Evaluation Criteria
-- Algorithm efficiency
-- Code readability
-- Heuristic effectiveness
-- Generalizability
-
-## Submission Requirements
-- Code repository (private, with TAs and instructor access)
-- Detailed project report
-- Demonstration of code functionality
-
-## Collaboration
-- Group size: Up to 5 students
-- Code sharing between groups is prohibited
-
-## Additional Notes
-- Document all external resources used
-- Maintain version history of code development
-
-## License
-[Add your license information here]
-
-## Contributors
-[List project contributors and their contributions]
